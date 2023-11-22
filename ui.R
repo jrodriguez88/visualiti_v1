@@ -39,8 +39,8 @@ ui <- fluidPage(
     mainPanel(
       mainPanel(
         tabsetPanel(id = "inTabset",
-                    tabPanel(title = 'Grafico de datos ggplot', value = "panel_ggplot", plotOutput('plot_data', width = "100%")),
-                    tabPanel("Grafico de datos plotly", value = "panel_plotly", plotlyOutput("plot_data2", width = "100%")),
+                    tabPanel(title = 'Grafico de datos ggplot', value = "panel_ggplot", plotOutput('plot_data', width = "100%", height = "70vh")),
+                    tabPanel("Grafico de datos plotly", value = "panel_plotly", plotlyOutput("plot_data2",  width = "100%", height = "70vh")),
                     tabPanel(title = "Tabla de datos", value = "panel_tabla", DTOutput("tabla_datos"))
                     #        tabPanel('', sliderInput()),
                     

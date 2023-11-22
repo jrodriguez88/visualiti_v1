@@ -20,8 +20,8 @@
 ## data 
 
 ## read txt files ---> ubicar la carpeta con los archivos txt descargados del sensor
-#path_data <- "data/"
-#files <- list.files(path_data, full.names = T, recursive = T, pattern = ".txt")
+
+#files <- list.files("data/", full.names = T, recursive = T, pattern = ".txt")
 
 ### funcion para importar datos de sensores Visualiti con conexion "Bluetooth Terminal HC-05
 # file = txt file # - Bluetooth Terminal HC-05.txt
@@ -81,7 +81,7 @@ soilraw_to_daily <- function(soilraw_data, nmin = 12){
   daily_data_soil <- soilraw_data %>% distinct() %>% group_by(id, date) %>% 
     summarise(n = n(), 
               Profundidad_0_20cm = mean(sensor_humedad_2, na.rm = T), 
-              Profundidad_20_40cm = mean(sensor_humedad_1, na.rm = T)) %>%
+              Profundidad_20_40cm = mean(sensor_humedad_1, na.rm = T), .groups = 'drop') %>%
     ungroup() %>% 
     filter(n>=nmin) %>% 
     pivot_longer(cols = -c(id, date, n), names_to = "Humedad_del_Suelo") # minimo % de los datos colectados por dia
@@ -96,7 +96,7 @@ rainraw_to_daily <- function(rainraw_data){
   
   rain_daily_data <- rainraw_data %>% distinct() %>%
     group_by(id, date) %>% 
-    summarise(n = n(), Precipitacion = sum(pluviometro_1, na.rm = T)) %>%
+    summarise(n = n(), Precipitacion = sum(pluviometro_1, na.rm = T), .groups = 'drop') %>%
     ungroup() ## add distinct data
   
   return(rain_daily_data)

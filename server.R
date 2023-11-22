@@ -65,7 +65,7 @@ server <- function(input, output, session) {
         
         
       }
-    }, height = 500, width = 800)
+    })
   })
   
   
@@ -97,7 +97,7 @@ server <- function(input, output, session) {
           # Configuración adicional del gráfico (puedes personalizar según tus necesidades)
           p <- p %>% layout(title = "Registro de Precipitacion",
                             xaxis = list(title = "Fecha"),
-                            yaxis = list(title = "Precipitacion(mm)"), height = 500, width = 800)
+                            yaxis = list(title = "Precipitacion(mm)"))
           
           
           
@@ -105,14 +105,16 @@ server <- function(input, output, session) {
         } else if (unique(datos()$datos_r$var) == "soil") {
           
           # Crear un gráfico interactivo con plotly
-          p <- plot_ly(data_plot, x = ~date_time, y = ~sensor_humedad_1, type = "scatter", mode = "lines", name = "Sensor 1")
+          p <- plot_ly(to_plot, 
+                       x = ~date_time, y = ~sensor_humedad_1, 
+                       type = "scatter", mode = "lines", name = "Sensor 1")
           
           p <- p %>% add_trace(y = ~sensor_humedad_2, name = 'Sensor 2', mode = 'lines') 
           
           # Configuración adicional del gráfico (puedes personalizar según tus necesidades)
           p <- p %>% layout(title = "Evolución de Humedad del Suelo",
                             xaxis = list(title = "Fecha"),
-                            yaxis = list(title = "Humedad del Suelo"), height = 500, width = 800)
+                            yaxis = list(title = "Humedad del Suelo"))
           
           
         }
